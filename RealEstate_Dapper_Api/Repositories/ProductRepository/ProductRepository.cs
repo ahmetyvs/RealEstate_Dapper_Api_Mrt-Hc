@@ -28,7 +28,10 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             //string query = "Select ProductID,Title,Price,City,District,Address,Type,CoverImage,CategoryName From Product inner join Category on Product.ProductCategory=Category.CategoryID";
 
             /*Employee Tablosu Dahil*/
-            string query = "SELECT Product.ProductID, Product.Title, Product.Price, Product.CoverImage, Product.City, Product.District, Product.Address, Product.Description, Product.Type, Category.CategoryName, Employee.Name FROM Product INNER JOIN Category ON Product.ProductCategoryID = Category.CategoryID INNER JOIN Employee ON Product.EmployeeID = Employee.EmployeeID";
+            string query = "SELECT Product.ProductID, Product.Title, Product.Price, Product.CoverImage, Product.City, Product.District, Product.Address, Product.Description, Product.Type, Category.CategoryName, Employee.Name" +
+                " FROM Product " +
+                "INNER JOIN Category ON Product.ProductCategoryID = Category.CategoryID " +
+                "INNER JOIN Employee ON Product.EmployeeID = Employee.EmployeeID";
 
             using (var connection = _context.CreateConnection())
             {
