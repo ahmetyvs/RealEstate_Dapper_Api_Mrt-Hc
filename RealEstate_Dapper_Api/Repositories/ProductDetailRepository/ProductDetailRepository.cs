@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using RealEstate_Dapper_Api.Dtos.ProductDetailDtos;
+using RealEstate_Dapper_Api.Dtos.ProductDtos;
 using RealEstate_Dapper_Api.Models.DapperContext;
 
 namespace RealEstate_Dapper_Api.Repositories.ProductDetailRepository
@@ -85,6 +86,24 @@ namespace RealEstate_Dapper_Api.Repositories.ProductDetailRepository
                 await connectiont.ExecuteAsync(query, parameters);
             }
         }
+
+        //public async Task<List<ResultProductDetailCategoryDto>> GetAllProductDetailWithCategoryAsync()
+        //{
+        //    /*Employee Tablosu Hariç*/
+        //    //string query = "Select ProductID,Title,Price,City,District,Address,Type,CoverImage,CategoryName From Product inner join Category on Product.ProductCategory=Category.CategoryID";
+
+        //    /*Employee Tablosu Dahil*/
+        //    string query = "SELECT Product.ProductID, Product.Title, Product.Price, Product.CoverImage, Product.City, Product.District, Product.Address, Product.Description, Product.Type, Category.CategoryName, Employee.Name" +
+        //        " FROM Product " +
+        //        "INNER JOIN Category ON Product.ProductCategoryID = Category.CategoryID " +
+        //        "INNER JOIN Employee ON Product.EmployeeID = Employee.EmployeeID";
+
+        //    using (var connection = _context.CreateConnection())
+        //    {
+        //        var values = await connection.QueryAsync<ResultProductWithCategoryDto>(query);
+        //        return values.ToList();
+        //    }
+        //}
 
     }
 }
