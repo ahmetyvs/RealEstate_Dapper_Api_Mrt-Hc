@@ -7,11 +7,11 @@ namespace RealEstate_Dapper_Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductDetailController : ControllerBase
+    public class ProductDetailsController : ControllerBase
     {
 
         private readonly IProductDetailRepository _productDetailRepository;
-        public ProductDetailController(IProductDetailRepository productDetailRepository)
+        public ProductDetailsController(IProductDetailRepository productDetailRepository)
         {
             _productDetailRepository = productDetailRepository;
         }

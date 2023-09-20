@@ -24,11 +24,13 @@ namespace RealEstate_Dapper_UI.Controllers
             }
             return View();
         }
+
         [HttpGet]
         public IActionResult CreateCategory()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryDto createCategoryDto)
         {

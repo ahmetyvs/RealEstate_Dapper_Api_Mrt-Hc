@@ -7,10 +7,10 @@ namespace RealEstate_Dapper_Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ServiceController : ControllerBase
+    public class ServicesController : ControllerBase
     {
         private readonly IServiceRepository _serviceRepository;
-        public ServiceController(IServiceRepository serviceRepository)
+        public ServicesController(IServiceRepository serviceRepository)
         {
             _serviceRepository = serviceRepository;
         }

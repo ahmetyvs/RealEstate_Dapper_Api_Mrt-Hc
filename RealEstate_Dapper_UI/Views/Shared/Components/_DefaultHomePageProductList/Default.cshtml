@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ResultProductDtos>
+﻿@model IEnumerable<ResultProductDto>
 
 <section class="locations-1" id="locations">
     <div class="locations py-5">
@@ -13,7 +13,7 @@
                         <a href="property-single.html">
                             <div class="box16">
                                 <div class="rentext-listing-category"><span>@item.type</span><span>@item.categoryName</span></div>
-                                <img class="img-fluid" style="height:150px;width:270px" src="@item.coverImage" alt="">
+                                <img class="img-fluid" style="height:190px;width:370px" src="@item.coverImage" alt="">
                                 <div class="box-content">
                                     <h3 class="title">₺ @item.price </h3>
                                     <span class="post">@item.address, @item.district/@item.city Türkiye</span>

@@ -1,18 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RealEstate_Dapper_Api.Dtos.BottomGridDtos;
-using RealEstate_Dapper_Api.Dtos.CategoryDtos;
 using RealEstate_Dapper_Api.Repositories.BottomGridRepository;
-using RealEstate_Dapper_Api.Repositories.CategoryRepository;
 
 namespace RealEstate_Dapper_Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BottomGridController : ControllerBase
+    public class BottomGridsController : ControllerBase
     {
         private readonly IBottomGridRepository _bottomGridRepository;
-        public BottomGridController(IBottomGridRepository bottomGridRepository)
+        public BottomGridsController(IBottomGridRepository bottomGridRepository)
         {
             _bottomGridRepository = bottomGridRepository;
         }
