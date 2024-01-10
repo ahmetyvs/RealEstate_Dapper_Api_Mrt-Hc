@@ -1,3 +1,4 @@
+using RealEstate_Dapper_Api.Hubs;
 using RealEstate_Dapper_Api.Models.DapperContext;
 using RealEstate_Dapper_Api.Repositories.BottomGridRepository;
 using RealEstate_Dapper_Api.Repositories.CategoryRepository;
@@ -31,21 +32,39 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Add services to the container.
+builder.Services.AddHttpClient();
+// SignalR
+builder.Services.AddSignalR();
+
+
+// CORS (Default) tanýmlama 1. yol
+//builder.Services.AddCors(options =>
+//{
+//    options.AddDefaultPolicy(
+//                      policy =>
+//                      {
+//                          policy.WithOrigins("https://localhost:7067",
+//                                              "https://localhost:7067")
+//                                           .AllowAnyHeader()
+//                                           .AllowAnyMethod()
+//                                           .SetIsOriginAllowed((host) => true)
+//                                           .AllowCredentials();
+//                          //.WithMethods("PUT", "DELETE", "GET");
+//                      });
+//});
+
+// CORS (Özel) tanýmlama 2. yol
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
-                      policy =>
-                      {
-                          policy.WithOrigins("https://localhost:7067",
-                                              "https://localhost:7067")
-                                           .AllowAnyHeader()
-                                           .AllowAnyMethod()
-                                           .SetIsOriginAllowed((host) => true)
-                                           .AllowCredentials();
-                          //.WithMethods("PUT", "DELETE", "GET");
-                      });
+    options.AddPolicy("CorsPolicy", builder =>
+     {
+         builder.AllowAnyHeader()
+                .AllowAnyMethod()
+                .SetIsOriginAllowed((host) => true)
+                .AllowCredentials();
+     });
 });
-
 
 var app = builder.Build();
 
@@ -56,11 +75,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(); //CORS
+// CORS (Default) tanýmlama 1. yol
+//app.UseCors(); //CORS
+
+// CORS (Özel) tanýmlama 2. yol
+app.UseCors("CorsPolicy");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<SignalRHub>("/signalrhub");
+//localhost:1234/swager/category/index Yukarýdaki tanýmlama bu satýr yerine aþaðýdaki kolaylýðý saðlar
+//localhost:1234/signalrhub  =  Yukarýdaki yerine buraya (view neredesye oraya) istek atýlmasýna saglar.
 
 app.Run();

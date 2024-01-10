@@ -12,6 +12,17 @@ namespace RealEstate_Dapper_Api.Repositories.CategoryRepository
             _context = context;
         }
 
+        public int CategoryCount()
+        {
+            //string query = "Select Count(*) From Category where CategoryStatus=1";
+            string query = "Select Count(*) From Category";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = connection.QueryFirstOrDefault<int>(query);
+                return values;
+            }
+        }
+
         public async void CreateCategory(CreateCategoryDto categoryDto)
         {
             string query = "insert into Category (CategoryName,CategoryStatus) values (@categoryName,@categoryStatus)";

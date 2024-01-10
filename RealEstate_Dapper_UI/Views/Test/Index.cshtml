@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.SignalR
+@{
+    ViewData["Title"] = "Index";
+}
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+<!-- Aşağıdaki  section Scripts = _Layouttaki await RenderSectionAsync("Scripts", required: false)'dan geliyor' -->
+@section Scripts
+    {
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <script type="text/javascript">
+                            $(document).ready(() => {
+                                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7067/SignalRHub").build(); // Buradaki /SignalRHub sınıf RealEstate_Dapper_Api->Hubs->SignalRHub'dan geliyor
+                                $("#connstatus").text(connection.state); // bağlantı durumunu yazdır (bağlanıyor mesajı veriyormuş gibi düşün)
+
+                                // alltaki ile de bağlantı durumunu aldıktan sonra bağlantının tam durumunu verir
+                                connection.start().then(() => {
+                                    $("#connstatus").text(connection.state);
+                                    connection.invoke("SendKategoriSayisi"); //SignalRHub'daki metot adı (modem)
+                                }).catch((err) => { console.log(err) });
+
+                                connection.on("KategoriSayisiniGonder", (value) => {
+                                    $("#categorycount").text(value);
+                                }); //KategoriSayisiniGonder SignalRHub'daki metot adı (modeme bağlanan client)
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="alert alert-warning">
+            Bağlantı Durumu :<strong id="connstatus"></strong>
+        </div>
+    </div>
+    <div class="col-md-8 offset-2">
+        <div class="alert alert-primary">
+            Kategori Sayısı :<strong id="categorycount"></strong>
+        </div>
+    </div>
+</div>

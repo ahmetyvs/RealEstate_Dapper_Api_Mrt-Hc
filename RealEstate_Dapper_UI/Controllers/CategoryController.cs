@@ -14,6 +14,7 @@ namespace RealEstate_Dapper_UI.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            #region Tüm liste
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7067/api/Categories");
             if (responseMessage.IsSuccessStatusCode)
@@ -22,7 +23,19 @@ namespace RealEstate_Dapper_UI.Controllers
                 var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
                 return View(values);
             }
-            return View();
+            #endregion
+            //#region Kategori Sayısı
+            ////Kat sayısı için istek atacağım yer
+            //var client2 = _httpClientFactory.CreateClient();
+            //var responseMessage2 = await client2.GetAsync("https://localhost:7067/api/Categories");
+            //if (responseMessage.IsSuccessStatusCode)
+            //{
+            //    var jsonData2 = await responseMessage.Content.ReadAsStringAsync();
+            //    ViewBag.categorySayisi = jsonData2;
+            //}
+            //#endregion
+
+            return View(); 
         }
 
         [HttpGet]
