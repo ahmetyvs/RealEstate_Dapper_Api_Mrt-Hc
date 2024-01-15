@@ -21,7 +21,10 @@
                                 // alltaki ile de bağlantı durumunu aldıktan sonra bağlantının tam durumunu verir
                                 connection.start().then(() => {
                                     $("#connstatus").text(connection.state);
-                                    connection.invoke("SendKategoriSayisi"); //SignalRHub'daki metot adı (modem)
+                                    setInterval(() =>
+                                    {
+                                       connection.invoke("SendKategoriSayisi"); // SendKategoriSayisi SignalRHub'daki metot adı (modem)
+                                    }, 1000);
                                 }).catch((err) => { console.log(err) });
 
                                 connection.on("KategoriSayisiniGonder", (value) => {
